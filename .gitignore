@@ -50,11 +50,13 @@ Thumbs.db
 *~
 
 # Generated documentation files
-*.html
 generate-*.js
 ARCHITECTURE_OVERVIEW.md
 API_DOCUMENTATION.md
 SETUP.md
+ARCHITECTURE_OVERVIEW.html
+API_DOCUMENTATION.html
+SETUP_INSTRUCTIONS.html
 
 # Temporary files
 *.tmp
