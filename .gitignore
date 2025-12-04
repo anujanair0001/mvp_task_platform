@@ -51,7 +51,6 @@ Thumbs.db
 
 # Generated documentation files
 *.html
-*.pdf
 generate-*.js
 ARCHITECTURE_OVERVIEW.md
 API_DOCUMENTATION.md
