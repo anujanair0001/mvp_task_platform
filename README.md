@@ -72,7 +72,7 @@ A secure, full-stack task collaboration platform with comprehensive user managem
    ```bash
    npm run dev
    ```
-   Server runs on `http://localhost:5001`
+   Server runs on `http://localhost:5002`
 
 ### Frontend Setup
 1. Navigate to frontend directory:
