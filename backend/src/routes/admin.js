@@ -164,10 +164,14 @@ const router = express.Router();
 // Get all tasks
 router.get('/tasks', adminAuth, async (req, res) => {
   try {
-    const page = parseInt(req.query.page) || 1;
-    const limit = parseInt(req.query.limit) || 10;
-    const result = await Task.getAll(page, limit);
-    res.json(result);
+    db.all(`SELECT t.*, u1.name as creatorName, u2.name as assigneeName 
+            FROM tasks t 
+            LEFT JOIN users u1 ON t.createdBy = u1.id 
+            LEFT JOIN users u2 ON t.assignedTo = u2.id 
+            ORDER BY t.createdAt DESC`, (err, tasks) => {
+      if (err) return res.status(500).json({ message: 'Server error' });
+      res.json(tasks || []);
+    });
   } catch (error) {
     res.status(500).json({ message: 'Server error' });
   }

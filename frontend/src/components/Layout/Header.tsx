@@ -90,7 +90,7 @@ const Header: React.FC = () => {
               borderRadius: '20px',
               fontSize: '0.9rem'
             }}>
-              👋 {user.name}
+              👤 {user.name}
             </div>
             <button
               onClick={logout}

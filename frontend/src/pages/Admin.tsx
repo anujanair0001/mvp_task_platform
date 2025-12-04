@@ -64,12 +64,16 @@ const Admin: React.FC = () => {
         adminAPI.getAllComments()
       ]);
       
-      setStats(statsRes.data);
-      setUsers(usersRes.data);
-      setTasks(tasksRes.data);
-      setComments(commentsRes.data);
+      setStats(statsRes.data || { totalUsers: 0, totalTasks: 0, totalComments: 0 });
+      setUsers(Array.isArray(usersRes.data) ? usersRes.data : []);
+      setTasks(Array.isArray(tasksRes.data) ? tasksRes.data : []);
+      setComments(Array.isArray(commentsRes.data) ? commentsRes.data : []);
     } catch (error) {
-      console.error('Failed to load admin data');
+      console.error('Failed to load admin data:', error);
+      // Set default empty arrays on error
+      setUsers([]);
+      setTasks([]);
+      setComments([]);
     } finally {
       setLoading(false);
     }
@@ -175,7 +179,7 @@ const Admin: React.FC = () => {
           <Card>
             <h3 style={{ margin: '0 0 1rem 0', color: '#2d3748' }}>All Users ({users.length})</h3>
             <div style={{ display: 'grid', gap: '1rem' }}>
-              {users.map(user => (
+              {Array.isArray(users) && users.map(user => (
                 <div key={user.id} style={{ 
                   display: 'grid', 
                   gridTemplateColumns: '1fr auto auto', 
@@ -214,7 +218,7 @@ const Admin: React.FC = () => {
           <Card>
             <h3 style={{ margin: '0 0 1rem 0', color: '#2d3748' }}>All Tasks ({tasks.length})</h3>
             <div style={{ display: 'grid', gap: '1rem' }}>
-              {tasks.map(task => (
+              {Array.isArray(tasks) && tasks.map(task => (
                 <div key={task.id} style={{ 
                   padding: '1rem',
                   background: '#f7fafc',
@@ -242,7 +246,7 @@ const Admin: React.FC = () => {
           <Card>
             <h3 style={{ margin: '0 0 1rem 0', color: '#2d3748' }}>All Comments ({comments.length})</h3>
             <div style={{ display: 'grid', gap: '1rem' }}>
-              {comments.map(comment => (
+              {Array.isArray(comments) && comments.map(comment => (
                 <div key={comment.id} style={{ 
                   padding: '1rem',
                   background: '#f7fafc',
